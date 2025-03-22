@@ -63,7 +63,14 @@ gh pr review <NUMBER | URL | BRANCH> --approve
 
 gh release create v0.1.0 --title "v0.1.0" --notes "Wonderful Text"
 gh release create v0.1.0 --title "v0.1.0" --notes "Wonderful Text" example.txt
+gh release create v0.2.0 --title "v0.2.0" --generate-notes
 ・特定のバージョンにアセットのアップロード
 gh release upload v0.1.0 example.txt
 
-# メモ
+# プルリクエスト
+
+・プルリクの作成
+gh pr create --fill-first
+gh pr create --fill-first --label "enhancement"
+・マージ
+gh pr merge --merge
