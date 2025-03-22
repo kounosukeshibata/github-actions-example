@@ -22,4 +22,4 @@ jobs:
           gh release upload "${VERSION}" "${RUNNER_TEMP}/example"
 
         env:
-          GITHUB_TOKEN: ${{ secrets.PASSWORD}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
