@@ -15,6 +15,11 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.22"
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/go/pkg/mod/cache
+          key: go-mod-${{ hashFiles('go.sum') }}
+      - run: go mod download
       - run: |
           go build -ldflags "-X main.version=${VERSION}" -o "${RUNNER_TEMP}/example" go/example/main.go
       - run: |
