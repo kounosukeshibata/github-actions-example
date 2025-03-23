@@ -74,3 +74,35 @@ gh pr create --fill-first
 gh pr create --fill-first --label "enhancement"
 ・マージ
 gh pr merge --merge
+
+# コンテナレジストリにコンテナイメージを push する
+
+## 個人アカウント名を環境変数へセット
+
+export GHCR_USER=$(gh config get -h github.com user)
+
+## コンテナイメージをビルド
+
+docker build -t ghcr.io/${GHCR_USER}/example:latest docker/example/
+docker build -t ghcr.io/${GHCR_USER}/auto-link:latest --label "org.opencontainers.image.source=https://github.com/${GHCR_USER}/my-repo" docker/example/
+
+## GitHub CLI から GitHub Packages へのアクセス許可
+
+gh auth refresh --scopes write:packages
+
+## GitHub CLI から GitHub Packages へのログイン
+
+gh auth token | docker login ghcr.io -u ${GHCR_USER} --password-stdin
+
+## コンテナレジストリにコンテナイメージを push
+
+docker push ghcr.io/${GHCR_USER}/example:latest
+docker push ghcr.io/${GHCR_USER}/auto-link:latest
+
+## コンテナイメージを pull する
+
+docker pull ghcr.io/${GHCR_USER}/example:latest
+
+# ワークフローの実行
+
+gh workflow run 10_6_publish.yml -f version=0.1.0
