@@ -12,6 +12,14 @@ gh --help
 
 gh repo list
 
+## 現在のリポジトリを確認
+
+gh repo view
+
+## リポジトリを切り替える
+
+対象のリポジトリのディレクトリに移動する（cd コマンドを使用）。
+
 ## カレントブランチでプルリクエストを作成
 
 gh pr create --fill-first --web
@@ -19,6 +27,8 @@ gh pr create --fill-first --web
 ## リポジトリの作成
 
 gh repo create my-app --public --clone --add-readme
+・プライベートリポジトリを作成
+gh repo create gh-oidc --private --clone --add-readme
 
 ## リモートリポジトリからクローン
 
